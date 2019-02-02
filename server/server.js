@@ -1,27 +1,29 @@
+'use strict';
+
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
+
+
 require('./config/config');
 const port = process.env.PORT;
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var jsonParser = bodyParser.json();
+const urlencodedParser = bodyParser.urlencoded({
+    extended: false
+});
+const jsonParser = bodyParser.json();
 app.use(urlencodedParser);
 app.use(jsonParser);
+app.use(require('./routes/usuario'));
 
 
 
-app.get('/', (req, res) => {
-    res.json('get Methos');
+
+mongoose.connect(process.env.URL_DB, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false }, (err, res) => {
+    if (err) throw err;
+    console.log('Conexión a base de datos establecida');
 });
-
-app.post('/usuario', (req, res) => {
-    let body = req.body;
-    res.json({
-        body
-    });
-})
-
 app.listen(port, () => {
     console.log(`Aplicacion corriendo en el puerto: ${port}`);
 });
