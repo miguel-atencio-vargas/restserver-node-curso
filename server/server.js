@@ -15,7 +15,9 @@ const urlencodedParser = bodyParser.urlencoded({
 const jsonParser = bodyParser.json();
 app.use(urlencodedParser);
 app.use(jsonParser);
-app.use(require('./routes/usuario'));
+
+//configuracion de rutas
+app.use(require('./routes/index'));
 
 
 
