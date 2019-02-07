@@ -2,8 +2,12 @@
 
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 const express = require('express');
 const app = express();
+
+// habilitar la carpeta public
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 
 require('./config/config');
